@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>CSS Template</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Style the header */
+    header {
+      background-color: #666;
+      padding: 30px;
+      text-align: center;
+      font-size: 35px;
+      color: white;
+    }
+
+    /* Create two columns/boxes that floats next to each other */
+    nav {
+      float: left;
+      width: 20%;
+
+      background: #ccc;
+      padding: 20px;
+    }
+
+    /* Style the list inside the menu */
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    article {
+      float: left;
+      padding: 20px;
+      width: 30%;
+      background-color: #f1f1f1;
+    }
+
+    /* Clear floats after the columns */
+    section:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Style the footer */
+    footer {
+      background-color: #777;
+      padding: 10px;
+      width: 50%;
+      text-align: center;
+      color: white;
+    }
+
+    /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+    @media (max-width: 600px) {
+
+      nav,
+      article {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Letter C</title>
+  </head>
+
+<body onload=body_onpageshow()>
+
+  <h2>Letter "C" Controls</h2>
+
+  <form action="cgi-bin/runneopixel.py" method="POST" id="LetC" onsubmit="on_form_submit()" class="LetC">
+
+    <section>
+      <nav>
+        <h1>Help</h1>
+        <ul>
+          <li><a href="overall.html">Overall</a></li>
+          <li><a href="colors.html">Colors</a></li>
+          <li><a href="animation.html">Animation</a></li>
+          <li><a href="shutoff.html">Shutoff</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h3>Colors</h3>
+        <input type="radio" name="pattern" value="rainbow" onchange="on_solid_chg()"> Rainbow<br>
+        <input type="radio" name="pattern" value="solid" onchange="on_solid_chg()" checked> Solid
+        <input id="npcolor" type="color" name=npcolor value="#ff0000" /><br>
+        <input type="radio" name="pattern" value="off" onchange="on_solid_chg()"> Off <br>
+        <label for="brite">Overall Brightness:</label>
+        <input type="range" min="2" max="100" value="100" class="slider" id="brite" name="brite" onchange="on_br_chg()">
+        <tag id="br_val"> </tag> <br>
+
+        <h3>Animation</h3>
+        <input type="radio" name="animation" value="none" onchange=on_scanner_chg() checked> None<br>
+        <input type="radio" name="animation" value="theater" onchange=on_scanner_chg()> Theater<br>
+        <input type="radio" name="animation" value="pulse" onchange=on_scanner_chg()> Pulsate<br>
+        <input type="radio" name="animation" value="scanner" onchange=on_scanner_chg()> Scanner<br>
+        <input type="radio" name="animation" value="rotate" onchange=on_scanner_chg()> Rotate
+        <label for="length" id="len_label"> Length:</label>
+        <input type="range" min="1" max="99" value="4" class="slider" id="length" name="length" onchange=on_len_chg()>
+        <tag id="len_val"> </tag> <br>
+        <input type="radio" name="animation" value="rainbow_cycle" onchange=on_rainbowcycle_chg()> Rainbow Cycle<br>
+        <input type="radio" name="animation" value="demo" onchange=on_scanner_chg()> Demo<br>
+        <label for="speed">Speed of animation:</label>
+        <input type="range" min="1" max="99" value="50" class="slider" id="speed" name="speed" onchange=on_spd_chg()>
+        <tag id="spd_val"> </tag> <br>
+
+        <h3>Shutoff</h3>
+        <input type="radio" name="shutoff" value="manual" checked> Play forever<br>
+        <input type="radio" name="shutoff" value="30_sec"> 30 seconds<br>
+        <input type="radio" name="shutoff" value="30_min"> 30 minutes<br>
+        <input type="radio" name="shutoff" value="1_hr"> 1 Hour<br>
+        <input type="radio" name="shutoff" value="2_hr"> 2 Hour<br> <br>
+
+        <input type="image" name="submit" src="playbutton.png" border="0" alt="Submit" style="style=width:20px;height:20px;" />
+
+      </article>
+  </form>
+  </section>
+  <script>
+    function on_br_chg() {
+      var x = document.getElementById("brite").value;
+      document.getElementById("br_val").innerHTML = " = " + x + "%";
+    }
+  </script>
+  <script>
+    function on_len_chg() {
+      var x = document.getElementById("length").value;
+      document.getElementById("len_val").innerHTML = " = " + x + "pixels";
+    }
+  </script>
+  <script>
+    function on_spd_chg() {
+      var x = document.getElementById("speed").value;
+      document.getElementById("spd_val").innerHTML = " = " + x + "%";
+    }
+  </script>
+  <script>
+    function on_solid_chg() {
+      if (document.getElementById("LetC").pattern[1].checked) {
+        document.getElementById("npcolor").style.display = "inline";
+      } else {
+        document.getElementById("npcolor").style.display = "none";
+      }
+    }
+  </script>
+  <script>
+    function on_rainbowcycle_chg() {
+      if (document.getElementById("LetC").animation[5].checked) {
+        document.getElementById("LetC").pattern[0].checked = true;
+        document.getElementById("npcolor").style.display = "none";
+      }
+      if (!document.getElementById("LetC").animation[3].checked &&
+        !document.getElementById("LetC").animation[4].checked) {
+        document.getElementById("length").style.display = "none";
+        document.getElementById("len_val").style.display = "none";
+        document.getElementById("len_label").style.display = "none";
+      }
+    }
+  </script>
+  <script>
+    function on_scanner_chg() {
+      if (!document.getElementById("LetC").animation[3].checked &&
+        !document.getElementById("LetC").animation[4].checked) {
+        document.getElementById("length").style.display = "none";
+        document.getElementById("len_val").style.display = "none";
+        document.getElementById("len_label").style.display = "none";
+      } else {
+        document.getElementById("length").style.display = "inline";
+        document.getElementById("len_val").style.display = "inline";
+        document.getElementById("len_label").style.display = "inline";
+      }
+    }
+  </script>
+  <script>
+    function on_form_submit() {
+      if (!document.getElementById("LetC").pattern[0].checked &&
+        !document.getElementById("LetC").pattern[1].checked &&
+        !document.getElementById("LetC").pattern[2].checked) {
+        document.getElementById("LetC").pattern[0].checked = true;
+        alert('fixed missing pattern!');
+      }
+
+      if (!document.getElementById("LetC").animation[0].checked &&
+        !document.getElementById("LetC").animation[1].checked &&
+        !document.getElementById("LetC").animation[2].checked &&
+        !document.getElementById("LetC").animation[3].checked &&
+        !document.getElementById("LetC").animation[4].checked &&
+        !document.getElementById("LetC").animation[5].checked &&
+        !document.getElementById("LetC").animation[6].checked) {
+        document.getElementById("LetC").animation[0].checked = true;
+        alert('fixed missing animation!');
+      }
+      if (!document.getElementById("LetC").shutoff[0].checked &&
+        !document.getElementById("LetC").shutoff[1].checked &&
+        !document.getElementById("LetC").shutoff[2].checked &&
+        !document.getElementById("LetC").shutoff[3].checked &&
+        !document.getElementById("LetC").shutoff[4].checked) {
+        document.getElementById("LetC").shutoff[1].checked = true;
+        alert('fixed missing shutoff!');
+      }
+
+      if (typeof(Storage) !== "undefined") {
+        localStorage.setItem("npcolor", document.getElementById("npcolor").value);
+        localStorage.setItem("speed", document.getElementById("speed").value);
+        localStorage.setItem("brite", document.getElementById("brite").value);
+        localStorage.setItem("length", document.getElementById("length").value);
+      } else {
+        alert('Localstorage not available with this browser!');
+      }
+      return false;
+    }
+  </script>
+  <script>
+    function body_onpageshow() {
+      if (typeof(Storage) !== "undefined") {
+        if (localStorage.npcolor != "undefined") {
+          document.getElementById("npcolor").value = localStorage.npcolor;
+        } else {
+          document.getElementById("npcolor").value = "#ff0000";
+        }
+        if (localStorage.speed != "undefined") {
+          document.getElementById("speed").value = localStorage.speed;
+        } else {
+          document.getElementById("speed").value = 50;
+        }
+        if (localStorage.brite != "undefined") {
+          document.getElementById("brite").value = localStorage.brite;
+        } else {
+          document.getElementById("brite").value = 100;
+        }
+        if (localStorage.length != "undefined") {
+          document.getElementById("length").value = localStorage.length;
+        } else {
+          document.getElementById("length").value = 8;
+        }
+      } else {
+        alert('Localstorage not available with this browser!');
+      }
+      if (!document.getElementById("LetC").pattern[0].checked &&
+        !document.getElementById("LetC").pattern[1].checked) {
+        document.getElementById("LetC").pattern[1].checked = true;
+      }
+      // Make sure one animation button checked
+      if (!document.getElementById("LetC").animation[0].checked &&
+        !document.getElementById("LetC").animation[1].checked &&
+        !document.getElementById("LetC").animation[2].checked &&
+        !document.getElementById("LetC").animation[3].checked &&
+        !document.getElementById("LetC").animation[4].checked &&
+        !document.getElementById("LetC").animation[5].checked &&
+        !document.getElementById("LetC").animation[6].checked) {
+        document.getElementById("LetC").animation[0].checked = true;
+      }
+      // Make sure one shutoff button checked
+      if (!document.getElementById("LetC").shutoff[0].checked &&
+        !document.getElementById("LetC").shutoff[1].checked &&
+        !document.getElementById("LetC").shutoff[2].checked &&
+        !document.getElementById("LetC").shutoff[3].checked &&
+        !document.getElementById("LetC").shutoff[4].checked &&
+        !document.getElementById("LetC").shutoff[5].checked) {
+        document.getElementById("LetC").shutoff[1].checked = true;
+      }
+      // show slider percentage
+      var x = document.getElementById("brite").value;
+      document.getElementById("br_val").innerHTML = " = " + x + "%";
+      var y = document.getElementById("speed").value;
+      document.getElementById("spd_val").innerHTML = " = " + y + "%";
+      var z = document.getElementById("length").value;
+      document.getElementById("len_val").innerHTML = " = " + z + "pixels";
+
+      // show length slider only if scanner or rotate mode selected
+      if (!document.getElementById("LetC").animation[3].checked &&
+        !document.getElementById("LetC").animation[4].checked) {
+        document.getElementById("length").style.display = "none";
+        document.getElementById("len_val").style.display = "none";
+        document.getElementById("len_label").style.display = "none";
+      } else {
+        document.getElementById("length").style.display = "inline";
+        document.getElementById("len_val").style.display = "inline";
+        document.getElementById("len_label").style.display = "inline";
+      }
+
+      return false;
+    }
+  </script>
+
+  <footer>
+    <p>Press <img src="playbutton.png" style="width:50px;height:30px;" alt="play button" /> button to send command to Letter C</p>
+  </footer>
+
+</body>
+
+</html>

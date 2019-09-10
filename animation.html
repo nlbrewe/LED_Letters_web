@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Animation</title>
+</head>
+
+<body>
+  <h1>LetterC Animation</h1>
+  <p>Animation refers to how colors and pixels appear to move on the display. The pixels don't actually move, but by turning
+    them on and off and changing the colors of the pixels gives them appearance of movement. The following options are available:
+  </p>
+  <p> <b>None</b> - No animation - You pick either a solid color or rainbow in the Color menu, and the pixels are set to the color(s) you choose.
+    There is no motion or color change associated with the pixels.</p>
+  <p> <b>Theater</b> - Pixels are arranged in groups of 3 contiguous pixels, and only one of the 3 is lit at a time. The lit
+    pixel moves one step at a time,making the entire display appear to rotate. The speed of movement is controlled by the "speed
+    of animation" setting.</p>
+  <p> <b>Pulsate</b> - The pixels can be set to either a solid or rainbow color. The intensity of the pixels goes from 0-255 and
+    back to 0 making the display appear to pulsate. The speed of pulsation is controlled by the "speed of animation" setting.</p>
+  <p> <b>Scanner and Rotate</b> - These two modes are similar.  A group of pixels moves together over the display. The Scanner display starts at the beginning of the
+    neopixel strip and goes to the other end of the strip, then returns. The Rotate display starts at the beginning and moves to the end,
+    then starts again at the beginning. The <b>Length</b> slider controls how big the group of pixels that moves is. The length slider only
+    appears when Rotate or Scanner mode is selected.
+  </p>
+</body>
+<form action="index.html" method="get">
+  <input type="submit" value="Return to LetterC" />
+</form>
+</html>
